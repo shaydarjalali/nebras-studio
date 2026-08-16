@@ -18,8 +18,9 @@ opacity:.55;animation:twinkle 5s ease-in-out infinite alternate}
 @keyframes twinkle{from{opacity:.4}to{opacity:.75}}
 .hero{position:absolute;z-index:2;inset:0;display:grid;place-items:center;perspective:1400px;pointer-events:none}
 .hero-glow{position:absolute;width:min(52vw,640px);height:min(52vw,640px);border-radius:50%;background:radial-gradient(circle,#e5b64a66 0%,#e5b64a28 35%,transparent 68%);filter:blur(6px);transform:scale(calc(.85 + var(--p,0)*.5));transition:transform .1s linear}
-.hero-tilt{transform-style:preserve-3d}
-.hero-spin{width:min(36vw,380px);aspect-ratio:2/3;transform-style:preserve-3d;animation:hero-spin 16s linear infinite;transform:scale(calc(.82 + var(--p,0)*.6)) rotateY(0deg);will-change:transform;position:relative}
+.hero-tilt{transform-style:preserve-3d;pointer-events:auto;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.hero-tilt.dragging{cursor:grabbing}
+.hero-spin{width:min(36vw,380px);aspect-ratio:2/3;transform-style:preserve-3d;animation:none;transform:scale(calc(.82 + var(--p,0)*.6)) rotateY(0deg);will-change:transform;position:relative}
 .hero-spin img{position:absolute;top:50%;left:50%;width:100%;display:block}
 @keyframes hero-spin{to{transform:scale(calc(.82 + var(--p,0)*.6)) rotateY(360deg)}}
 .clouds-front{position:absolute;z-index:3;inset:-15%;pointer-events:none}
@@ -70,7 +71,7 @@ header{transition:opacity .5s ease}
 .panel p,.panel li{font-size:14px;line-height:1.85}
 .panel small{font-size:11px}
 .works article{min-height:100px}
-@media(max-width:760px){.panel{top:0;width:calc(100vw - 28px);max-height:min(78svh,calc(100svh - 110px));padding:20px 20px}.panel h2{font-size:25px}.panel p,.panel li{font-size:12.5px;line-height:1.75}.works article{min-height:50px}}
+@media(max-width:760px){.panel{top:50%;width:calc(100vw - 28px);max-height:min(72svh,calc(100svh - 120px));padding:20px 20px}.panel h2{font-size:25px}.panel p,.panel li{font-size:12.5px;line-height:1.75}.works article{min-height:50px}}
 @media(max-height:620px){.panel{max-height:calc(100svh - 95px);padding-block:16px}.panel h2{font-size:21px;margin:6px 0}}
 
 /* ---------- Micro-interactions & creative polish ---------- */
@@ -114,3 +115,47 @@ html[dir=rtl] .cta:hover::before{transform-origin:left}
 @media(pointer:fine){.clouds,.dust{transition:transform .05s linear}}
 @media(max-width:760px){.socials a:hover,.works article:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){.hint{animation:none}.brand img,.langs button,.theme,.cta,.socials a,.works article,.rail i{transition:none}}
+
+/* Performance and composition refinements */
+.orbit{pointer-events:none}
+body{height:650vh}
+.intro{width:min(420px,38vw)}
+.hero-spin{width:min(38vw,410px)}
+.is-paused *{animation-play-state:paused!important}
+.socials a{width:auto;min-width:78px;padding-inline:14px;border-radius:99px}
+@media(max-width:760px){
+ body{height:780vh}
+ .hero-spin{width:min(58vw,300px)}
+ .hero-glow{opacity:.9}
+ .intro{width:auto}
+ .clouds-front img:nth-child(1){width:122vw;left:-27vw;opacity:.42}
+}
+
+/* A complete daytime art direction for light mode. */
+.stage,.sky-grad,.veil,.clouds img,.clouds-front img,.lights{transition:background .8s ease,filter .8s ease,opacity .8s ease}
+[data-theme=light] body,[data-theme=light] .stage{background:#b9d8ed}
+[data-theme=light] .sky-grad{background:
+ radial-gradient(520px 420px at 74% 18%,#fffbdc 0%,#ffe8a6 20%,transparent 58%),
+ radial-gradient(1000px 720px at 50% 32%,#bce4fb 0%,transparent 68%),
+ linear-gradient(180deg,#68b1df 0%,#a8d4ed 52%,#e8f0ef 100%);
+ box-shadow:inset 0 -90px 150px #ffffff70,inset 0 0 120px #4e94c933}
+[data-theme=light] .sky-grad::after{opacity:.08;animation:none}
+[data-theme=light] .veil{background:radial-gradient(circle at 52% 42%,transparent 22%,#8ebbd126 70%,#edf4f1a8 100%)}
+[data-theme=light] .cinematic-clouds{opacity:.86}
+[data-theme=light] .cinematic-clouds img{-webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 42%,#000b 58%,transparent 88%);mask-image:radial-gradient(ellipse 72% 68% at 50% 50%,#000 42%,#000b 58%,transparent 88%)}
+[data-theme=light] .cinematic-clouds img:nth-child(1){filter:brightness(1.42) saturate(.42) contrast(.72);opacity:.58}
+[data-theme=light] .cinematic-clouds img:nth-child(2){filter:brightness(1.48) saturate(.38) contrast(.7);opacity:.42}
+[data-theme=light] .cinematic-clouds img:nth-child(3){filter:brightness(1.55) saturate(.34) contrast(.68);opacity:.25}
+[data-theme=light] .clouds-front img:nth-child(1){filter:brightness(1.38) saturate(.4) contrast(.74);opacity:.42}
+[data-theme=light] .lights{opacity:.34;mix-blend-mode:soft-light}
+[data-theme=light] .hero-glow{background:radial-gradient(circle,#ffd4697a 0%,#ffe7a83b 38%,transparent 70%)}
+[data-theme=light] .dust{filter:sepia(.35) brightness(.82);opacity:.45}
+[data-theme=light] .hint{color:#344b5d}
+[data-theme=light] .rail{border-color:#395b7066}
+[data-theme=light] .rail i{background:#68879b}
+[data-theme=light] .rail i.on{background:#a56f13}
+@media(max-width:760px){
+ [data-theme=light] .cinematic-clouds img:nth-child(1){opacity:.5}
+ [data-theme=light] .cinematic-clouds img:nth-child(2){opacity:.36}
+ [data-theme=light] .clouds-front img:nth-child(1){opacity:.34}
+}
