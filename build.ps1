@@ -15,7 +15,6 @@ function DataUri([string]$path, [string]$mime) {
 
 $html = $html.Replace('<link rel="stylesheet" href="styles.css">', "<style>$css</style>")
 $html = $html.Replace('<script src="app.js"></script>', "<script>$js</script>")
-$html = $html.Replace('assets/orbit-sprite.webp', (DataUri (Join-Path $project 'assets\orbit-sprite.webp') 'image/webp'))
 $html = $html.Replace('assets/logo.webp', (DataUri (Join-Path $project 'assets\logo.webp') 'image/webp'))
 $html = $html.Replace('assets/cloud-cinematic-v1.webp', (DataUri (Join-Path $project 'assets\cloud-cinematic-v1.webp') 'image/webp'))
 
