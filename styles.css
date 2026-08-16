@@ -129,6 +129,13 @@ body{height:650vh}
  .hero-glow{opacity:.9}
  .intro{width:auto}
  .clouds-front img:nth-child(1){width:122vw;left:-27vw;opacity:.42}
+ .cinematic-clouds img:nth-child(3){display:none}
+ .cinematic-clouds img:nth-child(1){filter:brightness(.74) saturate(.7)}
+ .cinematic-clouds img:nth-child(2){filter:brightness(.78) saturate(.66)}
+ .clouds-front img:nth-child(1){filter:brightness(.76) saturate(.68)}
+ .lights{animation:none;opacity:.42}
+ .lights i:nth-child(2),.lights i:nth-child(3){display:none}
+ header{backdrop-filter:none}
 }
 
 /* A complete daytime art direction for light mode. */
@@ -158,4 +165,7 @@ body{height:650vh}
  [data-theme=light] .cinematic-clouds img:nth-child(1){opacity:.5}
  [data-theme=light] .cinematic-clouds img:nth-child(2){opacity:.36}
  [data-theme=light] .clouds-front img:nth-child(1){opacity:.34}
+ [data-theme=light] .cinematic-clouds img:nth-child(1){filter:brightness(1.34) saturate(.38) contrast(.74)}
+ [data-theme=light] .cinematic-clouds img:nth-child(2){filter:brightness(1.4) saturate(.34) contrast(.72)}
+ [data-theme=light] .clouds-front img:nth-child(1){filter:brightness(1.32) saturate(.36) contrast(.76)}
 }
