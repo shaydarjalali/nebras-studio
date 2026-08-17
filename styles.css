@@ -124,7 +124,7 @@ html[dir=rtl] .cta:hover::before{transform-origin:left}
 
 /* Performance and composition refinements */
 .orbit{pointer-events:none}
-body{height:650vh}
+body{height:460vh}
 .intro{width:min(420px,38vw)}
 .hero-spin{width:min(38vw,410px)}
 .is-paused *{animation-play-state:paused!important}
@@ -132,7 +132,7 @@ body{height:650vh}
 .socials a b{font:600 11px Manrope,sans-serif;font-weight:600}
 .socials a svg{flex-shrink:0}
 @media(max-width:760px){
- body{height:780vh}
+ body{height:420vh}
  .hero-spin{width:min(58vw,300px)}
  .hero-glow{opacity:.9}
  .intro{width:auto}
