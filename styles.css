@@ -203,3 +203,18 @@ transform:translate(-50%,-50%);opacity:0;transition:opacity .3s ease,width .2s e
 
 /* Smooth crossfade for the intro headline on language switch */
 .intro{transition:opacity .16s ease}
+
+/* Mobile performance pass: fewer simultaneous blurred/animated layers = less GPU jank */
+@media(max-width:760px){
+  /* drop the front cloud layer entirely on mobile — cinematic-clouds already carries the effect */
+  .clouds-front{display:none}
+  /* keep only the two nearest cinematic clouds; the far/faint third one adds cost for little visible gain */
+  .cinematic-clouds img:nth-child(3){display:none}
+  /* flatten blur on the remaining cloud layers — blur() is one of the heaviest filters for mobile GPUs */
+  .clouds img,.cinematic-clouds img{filter:brightness(.72) saturate(.7)!important}
+  /* lights: remove blend-mode + blur cost, keep just a soft static glow */
+  .lights{mix-blend-mode:normal;filter:none;opacity:.22}
+  .lights i{filter:blur(18px)}
+  /* will-change left on permanently forces extra GPU layers even when idle; scope it off outside interaction */
+  .orbit{will-change:auto}
+}
